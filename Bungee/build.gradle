@@ -1,0 +1,23 @@
+group = rootProject.group + '.bungee'
+version = rootProject.version
+archivesBaseName = rootProject.name + '-Bungee'
+
+repositories {
+    maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+}
+
+dependencies {
+    implementation project(":Common")
+    compileOnly "com.github.FrankHeijden.ServerUtils:ServerUtils-Common:${rootProject.serverutilsVersion}"
+    compileOnly "com.github.FrankHeijden.ServerUtils:ServerUtils-Bungee:${rootProject.serverutilsVersion}"
+    compileOnly 'net.md-5:bungeecord-api:1.16-R0.2-SNAPSHOT'
+}
+
+processResources {
+    from('src/main/resources') {
+        include 'bungee.yml'
+        expand(version: project.version)
+    }
+}
+
+shadowJar {}

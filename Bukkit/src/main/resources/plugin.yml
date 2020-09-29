@@ -1,0 +1,5 @@
+name: ServerUtilsUpdater
+main: net.frankheijden.serverutilsupdater.bukkit.ServerUtilsUpdater
+version: ${version}
+author: FrankHeijden
+api-version: '1.13'

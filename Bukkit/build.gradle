@@ -1,0 +1,19 @@
+group = rootProject.group + '.bukkit'
+version = rootProject.version
+archivesBaseName = rootProject.name + '-Bukkit'
+
+dependencies {
+    implementation project(":Common")
+    compileOnly "com.github.FrankHeijden.ServerUtils:ServerUtils-Common:${rootProject.serverutilsVersion}"
+    compileOnly "com.github.FrankHeijden.ServerUtils:ServerUtils-Bukkit:${rootProject.serverutilsVersion}"
+    compileOnly 'com.destroystokyo.paper:paper-api:1.16.3-R0.1-SNAPSHOT'
+}
+
+processResources {
+    from('src/main/resources') {
+        include 'plugin.yml'
+        expand(version: project.version)
+    }
+}
+
+shadowJar {}

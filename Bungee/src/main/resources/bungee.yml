@@ -1,0 +1,4 @@
+name: ServerUtilsUpdater
+main: net.frankheijden.serverutilsupdater.bungee.ServerUtilsUpdater
+version: ${version}
+author: FrankHeijden
