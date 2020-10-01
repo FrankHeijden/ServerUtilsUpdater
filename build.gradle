@@ -10,7 +10,7 @@ sourceCompatibility = targetCompatibility = JavaVersion.VERSION_1_8
 
 allprojects {
     ext {
-        serverutilsVersion = '2.1.0'
+        serverutilsVersion = '2.2.1'
     }
 }
 

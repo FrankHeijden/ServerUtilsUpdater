@@ -9,11 +9,13 @@ import java.lang.reflect.Field;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.logging.Level;
 
 import net.frankheijden.serverutils.bungee.ServerUtils;
+import net.frankheijden.serverutils.bungee.managers.BungeePluginManager;
 import net.frankheijden.serverutilsupdater.common.Updater;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.plugin.Plugin;
@@ -30,37 +32,41 @@ public class ServerUtilsUpdater extends Plugin implements Updater {
     public void update(File file) {
         ProxyServer proxy = ProxyServer.getInstance();
 
-        PluginDescription desc;
-        try {
-            desc = getPluginDescription(file);
-        } catch (Throwable th) {
-            proxy.getLogger().log(Level.WARNING, "Error fetching PluginDescription", th);
-            return;
-        }
+        proxy.getScheduler().schedule(this, () -> {
+            PluginDescription desc;
+            try {
+                desc = getPluginDescription(file);
+            } catch (Throwable th) {
+                proxy.getLogger().log(Level.WARNING, "Error fetching PluginDescription", th);
+                return;
+            }
 
-        ServerUtils plugin;
-        try {
-            URL url = desc.getFile().toURI().toURL();
-            URLClassLoader loader = (URLClassLoader) newPluginClassLoader(proxy, desc, url);
+            ServerUtils plugin;
+            try {
+                URL url = desc.getFile().toURI().toURL();
+                URLClassLoader loader = (URLClassLoader) newPluginClassLoader(proxy, desc, url);
 
-            Class<?> main = loader.loadClass(desc.getMain());
-            plugin = (ServerUtils) main.getDeclaredConstructor().newInstance();
+                Class<?> main = loader.loadClass(desc.getMain());
+                plugin = (ServerUtils) main.getDeclaredConstructor().newInstance();
 
-            getPlugins(proxy.getPluginManager()).put(desc.getName(), plugin);
-            plugin.onLoad();
-            proxy.getLogger().log(Level.INFO, "Loaded plugin {0} version {1} by {2}", new Object[] {
-                    desc.getName(), desc.getVersion(), desc.getAuthor()
-            });
-        } catch (Throwable th) {
-            proxy.getLogger().log(Level.WARNING, "Error loading plugin " + desc.getName(), th);
-            return;
-        }
+                getPlugins(proxy.getPluginManager()).put(desc.getName(), plugin);
+                plugin.onLoad();
+                proxy.getLogger().log(Level.INFO, "Loaded plugin {0} version {1} by {2}", new Object[] {
+                        desc.getName(), desc.getVersion(), desc.getAuthor()
+                });
+            } catch (Throwable th) {
+                proxy.getLogger().log(Level.WARNING, "Error loading plugin " + desc.getName(), th);
+                return;
+            }
 
-        plugin.onEnable();
-        Object[] args = new Object[] { desc.getName(), desc.getVersion(), desc.getAuthor() };
-        proxy.getLogger().log(Level.INFO, "Enabled plugin {0} version {1} by {2}", args);
+            plugin.onEnable();
+            Object[] args = new Object[] { desc.getName(), desc.getVersion(), desc.getAuthor() };
+            proxy.getLogger().log(Level.INFO, "Enabled plugin {0} version {1} by {2}", args);
 
-        plugin.getPlugin().getPluginManager().unloadPlugin(this);
+            BungeePluginManager manager = plugin.getPlugin().getPluginManager();
+            manager.disablePlugin(this);
+            manager.unloadPlugin(this).tryClose();
+        }, 0, TimeUnit.MILLISECONDS);
     }
 
     /**

@@ -16,22 +16,24 @@ public class ServerUtilsUpdater extends JavaPlugin implements Updater {
      * @param file The resource file.
      */
     public void update(File file) {
-        PluginManager serverManager = Bukkit.getPluginManager();
-        ServerUtils plugin = null;
-        try {
-            plugin = (ServerUtils) serverManager.loadPlugin(file);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+        Bukkit.getScheduler().runTask(this, () -> {
+            PluginManager serverManager = Bukkit.getPluginManager();
+            ServerUtils plugin = null;
+            try {
+                plugin = (ServerUtils) serverManager.loadPlugin(file);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
 
-        if (plugin == null) {
-            getLogger().severe("Unable to load plugin ServerUtils, please restart the server manually.");
-            return;
-        }
+            if (plugin == null) {
+                getLogger().severe("Unable to load plugin ServerUtils, please restart the server manually.");
+                return;
+            }
 
-        serverManager.enablePlugin(plugin);
-        BukkitPluginManager manager = plugin.getPlugin().getPluginManager();
-        manager.disablePlugin(this);
-        manager.unloadPlugin(this);
+            serverManager.enablePlugin(plugin);
+            BukkitPluginManager manager = plugin.getPlugin().getPluginManager();
+            manager.disablePlugin(this);
+            manager.unloadPlugin(this).tryClose();
+        });
     }
 }
