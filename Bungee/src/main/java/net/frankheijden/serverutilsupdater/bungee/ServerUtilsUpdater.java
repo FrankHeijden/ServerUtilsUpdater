@@ -63,6 +63,8 @@ public class ServerUtilsUpdater extends Plugin implements Updater {
             Object[] args = new Object[] { desc.getName(), desc.getVersion(), desc.getAuthor() };
             proxy.getLogger().log(Level.INFO, "Enabled plugin {0} version {1} by {2}", args);
 
+            getLogger().info(String.format(UPGRADE_SUCCESS, plugin.getDescription().getVersion()));
+
             BungeePluginManager manager = plugin.getPlugin().getPluginManager();
             manager.disablePlugin(this);
             manager.unloadPlugin(this).tryClose();

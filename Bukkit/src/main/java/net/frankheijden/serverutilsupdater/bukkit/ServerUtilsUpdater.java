@@ -31,6 +31,8 @@ public class ServerUtilsUpdater extends JavaPlugin implements Updater {
             }
 
             serverManager.enablePlugin(plugin);
+            getLogger().info(String.format(UPGRADE_SUCCESS, plugin.getDescription().getVersion()));
+
             BukkitPluginManager manager = plugin.getPlugin().getPluginManager();
             manager.disablePlugin(this);
             manager.unloadPlugin(this).tryClose();

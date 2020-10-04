@@ -4,6 +4,8 @@ import java.io.File;
 
 public interface Updater {
 
+    String UPGRADE_SUCCESS = "Successfully upgraded ServerUtils to v%s!";
+
     /**
      * Updates the plugin to the given resource.
      * @param file The resource file.
