@@ -2,8 +2,7 @@ group = rootProject.group + '.common'
 version = rootProject.version
 archivesBaseName = rootProject.name + '-Common'
 
-dependencies {
-    compileOnly "com.github.FrankHeijden.ServerUtils:ServerUtils-Common:${rootProject.serverutilsVersion}"
+shadowJar {
+    relocate 'net.frankheijden.serverutils.', project.dependencyDir + '.su.'
+    relocate 'dev.frankheijden.minecraftreflection', project.dependencyDir + '.minecraftreflection'
 }
-
-shadowJar {}

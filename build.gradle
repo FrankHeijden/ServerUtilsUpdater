@@ -4,13 +4,16 @@ plugins {
 }
 
 group = 'net.frankheijden.serverutilsupdater'
+project.ext {
+    dependencyDir = group + '.dependencies'
+}
 version = '1.0.0'
 
 sourceCompatibility = targetCompatibility = JavaVersion.VERSION_1_8
 
 allprojects {
     ext {
-        serverutilsVersion = '2.2.1'
+        serverutilsVersion = '6ebe0073ea'
     }
 }
 
@@ -23,11 +26,13 @@ subprojects {
 
     repositories {
         mavenCentral()
+        maven { url 'https://repo.aikar.co/content/groups/aikar/' }
         maven { url 'https://papermc.io/repo/repository/maven-public/' }
         maven { url 'https://jitpack.io' }
     }
 
     dependencies {
+        implementation "com.github.FrankHeijden.ServerUtils:ServerUtils-Common:${rootProject.serverutilsVersion}"
         testCompile 'org.assertj:assertj-core:3.15.0'
         testCompile 'org.junit.jupiter:junit-jupiter-api:5.6.2'
         testCompile 'org.junit.jupiter:junit-jupiter-params:5.6.2'
@@ -67,3 +72,10 @@ dependencies {
 }
 
 build.dependsOn shadowJar
+
+shadowJar {
+    exclude 'co/aikar/**'
+    exclude '*.properties'
+    exclude 'org/bstats/**'
+    exclude 'bukkit-config.yml', 'bukkit-messages.yml', 'bungee-config.yml', 'bungee-messages.yml'
+}
