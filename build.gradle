@@ -13,7 +13,7 @@ sourceCompatibility = targetCompatibility = JavaVersion.VERSION_1_8
 
 allprojects {
     ext {
-        serverutilsVersion = '6ebe0073ea'
+        serverutilsVersion = '2.5.4'
     }
 }
 
