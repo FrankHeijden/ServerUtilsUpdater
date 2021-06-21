@@ -7,13 +7,13 @@ group = 'net.frankheijden.serverutilsupdater'
 project.ext {
     dependencyDir = group + '.dependencies'
 }
-version = '2.0.1'
+version = '2.0.2'
 
 sourceCompatibility = targetCompatibility = JavaVersion.VERSION_1_8
 
 allprojects {
     ext {
-        serverutilsVersion = '2.5.4'
+        serverutilsVersion = '2.5.5'
     }
 }
 
