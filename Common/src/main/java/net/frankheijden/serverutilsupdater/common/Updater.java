@@ -29,6 +29,12 @@ public interface Updater<T> {
             AbstractPluginManager<T> pluginManager = getPluginManager();
             Logger logger = getLogger();
 
+            T oldPlugin = pluginManager.getPlugin("ServerUtils");
+            if (oldPlugin != null) {
+                pluginManager.disablePlugin(oldPlugin);
+                pluginManager.unloadPlugin(oldPlugin).tryClose();
+            }
+
             LoadResult<T> loadResult = pluginManager.loadPlugin(file);
             if (!loadResult.isSuccess()) {
                 logger.severe("Unable to load plugin \"" + file.getName() + "\": " + loadResult.getResult().name());
