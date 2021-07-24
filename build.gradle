@@ -13,7 +13,7 @@ sourceCompatibility = targetCompatibility = JavaVersion.VERSION_1_8
 
 allprojects {
     ext {
-        serverutilsVersion = '2.5.5'
+        serverutilsVersion = '585eaab02a'
     }
 }
 
@@ -69,13 +69,20 @@ dependencies {
     implementation project(path: ':Common', configuration: 'shadow')
     implementation project(path: ':Bukkit', configuration: 'shadow')
     implementation project(path: ':Bungee', configuration: 'shadow')
+    implementation project(path: ':Velocity', configuration: 'shadow')
 }
 
 build.dependsOn shadowJar
 
 shadowJar {
+    relocate 'net.frankheijden.serverutils.', dependencyDir + '.su.'
+    relocate 'dev.frankheijden.minecraftreflection', dependencyDir + '.minecraftreflection'
+    relocate 'cloud.commandframework', dependencyDir + '.cloud'
+    relocate 'io.leangen.geantyref', dependencyDir + '.typetoken'
+    relocate 'com.google.gson', dependencyDir + '.gson'
     exclude 'co/aikar/**'
-    exclude '*.properties'
     exclude 'org/bstats/**'
-    exclude 'bukkit-config.yml', 'bukkit-messages.yml', 'bungee-config.yml', 'bungee-messages.yml'
+    exclude '*commands.json'
+    exclude '*config.json'
+    exclude '*messages.json'
 }

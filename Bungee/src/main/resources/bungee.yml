@@ -2,3 +2,4 @@ name: ServerUtilsUpdater
 main: net.frankheijden.serverutilsupdater.bungee.BungeeUpdater
 version: ${version}
 author: FrankHeijden
+softdepends: ["ServerUtils"]

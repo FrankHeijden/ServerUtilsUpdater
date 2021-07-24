@@ -14,8 +14,3 @@ processResources {
         expand(version: project.version)
     }
 }
-
-shadowJar {
-    relocate 'net.frankheijden.serverutils.', project.dependencyDir + '.su.'
-    relocate 'dev.frankheijden.minecraftreflection', project.dependencyDir + '.minecraftreflection'
-}

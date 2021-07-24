@@ -1,3 +1,2 @@
 rootProject.name = 'ServerUtilsUpdater'
-include 'Common', 'Bukkit', 'Bungee'
-
+include 'Common', 'Bukkit', 'Bungee', 'Velocity'

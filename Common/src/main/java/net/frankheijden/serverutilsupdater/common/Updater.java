@@ -48,10 +48,6 @@ public interface Updater<T> {
             } else {
                 logger.severe("Unable to enable plugin " + getName(plugin) + ": " + result.name());
             }
-
-            T self = getPlugin();
-            pluginManager.disablePlugin(self);
-            pluginManager.unloadPlugin(self).tryClose();
         });
     }
 }
