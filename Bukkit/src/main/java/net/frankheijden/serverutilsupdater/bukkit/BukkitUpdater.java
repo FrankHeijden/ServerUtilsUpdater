@@ -35,4 +35,9 @@ public class BukkitUpdater extends JavaPlugin implements Updater<Plugin> {
     public String getName(Plugin plugin) {
         return plugin.getName();
     }
+
+    @Override
+    public String getServerUtilsPluginName() {
+        return "ServerUtils";
+    }
 }

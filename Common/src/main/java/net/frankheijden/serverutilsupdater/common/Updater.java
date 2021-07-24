@@ -20,6 +20,8 @@ public interface Updater<T> {
 
     String getName(T plugin);
 
+    String getServerUtilsPluginName();
+
     /**
      * Updates the plugin to the given resource.
      * @param file The resource file.
@@ -29,7 +31,7 @@ public interface Updater<T> {
             AbstractPluginManager<T> pluginManager = getPluginManager();
             Logger logger = getLogger();
 
-            T oldPlugin = pluginManager.getPlugin("ServerUtils");
+            T oldPlugin = pluginManager.getPlugin(getServerUtilsPluginName());
             if (oldPlugin != null) {
                 pluginManager.disablePlugin(oldPlugin);
                 pluginManager.unloadPlugin(oldPlugin).tryClose();

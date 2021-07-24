@@ -34,4 +34,9 @@ public class BungeeUpdater extends Plugin implements Updater<Plugin> {
     public String getName(Plugin plugin) {
         return plugin.getDescription().getName();
     }
+
+    @Override
+    public String getServerUtilsPluginName() {
+        return "ServerUtils";
+    }
 }

@@ -81,4 +81,9 @@ public class VelocityUpdater implements Updater<PluginContainer> {
     public String getName(PluginContainer plugin) {
         return plugin.getDescription().getName().orElse("<UNKNOWN>");
     }
+
+    @Override
+    public String getServerUtilsPluginName() {
+        return "serverutils";
+    }
 }
