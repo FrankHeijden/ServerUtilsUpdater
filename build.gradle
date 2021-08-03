@@ -13,7 +13,7 @@ sourceCompatibility = targetCompatibility = JavaVersion.VERSION_1_8
 
 allprojects {
     ext {
-        serverutilsVersion = '585eaab02a'
+        serverutilsVersion = '83ddfdd953'
     }
 }
 
@@ -32,7 +32,10 @@ subprojects {
     }
 
     dependencies {
-        implementation "com.github.FrankHeijden.ServerUtils:ServerUtils-Common:${rootProject.serverutilsVersion}"
+        implementation ("com.github.FrankHeijden.ServerUtils:ServerUtils-Common:${rootProject.serverutilsVersion}") {
+            exclude group: 'com.mojang', module: 'brigadier'
+            exclude group: 'me.lucko', module: 'commodore'
+        }
         testCompile 'org.assertj:assertj-core:3.15.0'
         testCompile 'org.junit.jupiter:junit-jupiter-api:5.6.2'
         testCompile 'org.junit.jupiter:junit-jupiter-params:5.6.2'
@@ -75,14 +78,16 @@ dependencies {
 build.dependsOn shadowJar
 
 shadowJar {
-    relocate 'net.frankheijden.serverutils.', dependencyDir + '.su.'
-    relocate 'dev.frankheijden.minecraftreflection', dependencyDir + '.minecraftreflection'
-    relocate 'cloud.commandframework', dependencyDir + '.cloud'
-    relocate 'io.leangen.geantyref', dependencyDir + '.typetoken'
-    relocate 'com.google.gson', dependencyDir + '.gson'
-    exclude 'co/aikar/**'
-    exclude 'org/bstats/**'
     exclude '*commands.json'
     exclude '*config.json'
     exclude '*messages.json'
+    exclude 'net/kyori/**'
+    exclude 'cloud/commandframework/**'
+    exclude 'com/google/**'
+    exclude 'io/leangen/**'
+    exclude 'javax/annotation/**'
+    exclude 'org/bstats/**'
+    exclude 'org/checkerframework/**'
+    relocate 'net.frankheijden.serverutils.', dependencyDir + '.su.'
+    relocate 'dev.frankheijden.minecraftreflection', dependencyDir + '.minecraftreflection'
 }

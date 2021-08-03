@@ -1,7 +1,6 @@
 package net.frankheijden.serverutilsupdater.bungee;
 
 import net.frankheijden.serverutils.bungee.managers.BungeePluginManager;
-import net.frankheijden.serverutils.common.managers.AbstractPluginManager;
 import net.frankheijden.serverutilsupdater.common.Updater;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.plugin.Plugin;
@@ -21,18 +20,13 @@ public class BungeeUpdater extends Plugin implements Updater<Plugin> {
     }
 
     @Override
-    public AbstractPluginManager<Plugin> getPluginManager() {
+    public BungeePluginManager getPluginManager() {
         return pluginManager;
     }
 
     @Override
     public String getVersion(Plugin plugin) {
         return plugin.getDescription().getVersion();
-    }
-
-    @Override
-    public String getName(Plugin plugin) {
-        return plugin.getDescription().getName();
     }
 
     @Override

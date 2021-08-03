@@ -4,7 +4,10 @@ archivesBaseName = rootProject.name + '-Bungee'
 
 dependencies {
     implementation project(":Common")
-    implementation "com.github.FrankHeijden.ServerUtils:ServerUtils-Bungee:${rootProject.serverutilsVersion}"
+    implementation ("com.github.FrankHeijden.ServerUtils:ServerUtils-Bungee:${rootProject.serverutilsVersion}") {
+        exclude group: 'com.mojang', module: 'brigadier'
+        exclude group: 'me.lucko', module: 'commodore'
+    }
     compileOnly 'net.md-5:bungeecord-api:1.16-R0.2-SNAPSHOT'
 }
 

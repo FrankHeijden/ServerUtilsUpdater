@@ -1,7 +1,6 @@
 package net.frankheijden.serverutilsupdater.bukkit;
 
 import net.frankheijden.serverutils.bukkit.managers.BukkitPluginManager;
-import net.frankheijden.serverutils.common.managers.AbstractPluginManager;
 import net.frankheijden.serverutilsupdater.common.Updater;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
@@ -22,18 +21,13 @@ public class BukkitUpdater extends JavaPlugin implements Updater<Plugin> {
     }
 
     @Override
-    public AbstractPluginManager<Plugin> getPluginManager() {
+    public BukkitPluginManager getPluginManager() {
         return pluginManager;
     }
 
     @Override
     public String getVersion(Plugin plugin) {
         return plugin.getDescription().getVersion();
-    }
-
-    @Override
-    public String getName(Plugin plugin) {
-        return plugin.getName();
     }
 
     @Override

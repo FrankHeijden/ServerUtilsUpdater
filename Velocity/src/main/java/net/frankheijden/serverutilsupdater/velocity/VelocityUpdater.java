@@ -9,7 +9,6 @@ import com.velocitypowered.api.proxy.ProxyServer;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.logging.Logger;
-import net.frankheijden.serverutils.common.managers.AbstractPluginManager;
 import net.frankheijden.serverutils.velocity.managers.VelocityPluginCommandManager;
 import net.frankheijden.serverutils.velocity.managers.VelocityPluginManager;
 import net.frankheijden.serverutilsupdater.common.Updater;
@@ -68,18 +67,13 @@ public class VelocityUpdater implements Updater<PluginContainer> {
     }
 
     @Override
-    public AbstractPluginManager<PluginContainer> getPluginManager() {
+    public VelocityPluginManager getPluginManager() {
         return pluginManager;
     }
 
     @Override
     public String getVersion(PluginContainer plugin) {
         return plugin.getDescription().getVersion().orElse("<UNKNOWN>");
-    }
-
-    @Override
-    public String getName(PluginContainer plugin) {
-        return plugin.getDescription().getName().orElse("<UNKNOWN>");
     }
 
     @Override

@@ -12,7 +12,10 @@ repositories {
 
 dependencies {
     implementation project(":Common")
-    implementation "com.github.FrankHeijden.ServerUtils:ServerUtils-Velocity:${rootProject.serverutilsVersion}"
+    implementation ("com.github.FrankHeijden.ServerUtils:ServerUtils-Velocity:${rootProject.serverutilsVersion}") {
+        exclude group: 'com.mojang', module: 'brigadier'
+        exclude group: 'me.lucko', module: 'commodore'
+    }
     compileOnly 'com.velocitypowered:velocity-api:3.0.0'
     compileOnly 'com.velocitypowered:velocity-brigadier:1.0.0-SNAPSHOT'
     compileOnly 'com.electronwill.night-config:toml:3.6.3'
