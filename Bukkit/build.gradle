@@ -4,16 +4,14 @@ archivesBaseName = rootProject.name + '-Bukkit'
 
 dependencies {
     implementation project(":Common")
-    implementation ("com.github.FrankHeijden.ServerUtils:ServerUtils-Bukkit:${rootProject.serverutilsVersion}") {
-        exclude group: 'com.mojang', module: 'brigadier'
-        exclude group: 'me.lucko', module: 'commodore'
-    }
-    compileOnly 'com.destroystokyo.paper:paper-api:1.16.4-R0.1-SNAPSHOT'
+    implementation "net.frankheijden.serverutils:ServerUtils-Bukkit:${rootProject.serverutilsVersion}"
+    compileOnly 'com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT'
 }
 
 processResources {
     from('src/main/resources') {
         include 'plugin.yml'
         expand(version: project.version)
+        duplicatesStrategy = DuplicatesStrategy.INCLUDE
     }
 }

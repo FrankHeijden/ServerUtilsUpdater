@@ -4,10 +4,7 @@ archivesBaseName = rootProject.name + '-Bungee'
 
 dependencies {
     implementation project(":Common")
-    implementation ("com.github.FrankHeijden.ServerUtils:ServerUtils-Bungee:${rootProject.serverutilsVersion}") {
-        exclude group: 'com.mojang', module: 'brigadier'
-        exclude group: 'me.lucko', module: 'commodore'
-    }
+    implementation "net.frankheijden.serverutils:ServerUtils-Bungee:${rootProject.serverutilsVersion}"
     compileOnly 'net.md-5:bungeecord-api:1.16-R0.2-SNAPSHOT'
 }
 
@@ -15,5 +12,6 @@ processResources {
     from('src/main/resources') {
         include 'bungee.yml'
         expand(version: project.version)
+        duplicatesStrategy = DuplicatesStrategy.INCLUDE
     }
 }
