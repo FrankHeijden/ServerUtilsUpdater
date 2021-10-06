@@ -89,4 +89,14 @@ shadowJar {
     exclude 'org/checkerframework/**'
     relocate 'net.frankheijden.serverutils.', dependencyDir + '.su.'
     relocate 'dev.frankheijden.minecraftreflection', dependencyDir + '.minecraftreflection'
+    classifier ''
+}
+
+publishing {
+    publications {
+        shadow(MavenPublication) {
+            artifact shadowJar
+            artifactId "ServerUtilsUpdater"
+        }
+    }
 }
