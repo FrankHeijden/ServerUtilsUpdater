@@ -8,13 +8,13 @@ group = 'net.frankheijden.serverutilsupdater'
 project.ext {
     dependencyDir = group + '.dependencies'
 }
-version = '3.0.1'
+version = '3.0.2'
 
 sourceCompatibility = targetCompatibility = JavaVersion.VERSION_1_8
 
 allprojects {
     ext {
-        serverutilsVersion = '3.1.0-SNAPSHOT'
+        serverutilsVersion = '3.3.0'
     }
 }
 
@@ -30,6 +30,7 @@ subprojects {
         maven { url 'https://repo.aikar.co/content/groups/aikar/' }
         maven { url 'https://papermc.io/repo/repository/maven-public/' }
         maven { url 'https://repo.fvdh.dev/snapshots' }
+        maven { url 'https://repo.fvdh.dev/releases' }
     }
 
     dependencies {
