@@ -5,7 +5,7 @@ archivesBaseName = rootProject.name + '-Bungee'
 dependencies {
     implementation project(":Common")
     implementation "net.frankheijden.serverutils:ServerUtils-Bungee:${rootProject.serverutilsVersion}"
-    compileOnly 'net.md-5:bungeecord-api:1.16-R0.2-SNAPSHOT'
+    compileOnly 'net.md-5:bungeecord-api:1.19-R0.1-SNAPSHOT'
 }
 
 processResources {

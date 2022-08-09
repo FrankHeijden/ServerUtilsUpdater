@@ -1,20 +1,20 @@
 plugins {
     id 'java-library'
     id 'maven-publish'
-    id 'com.github.johnrengelman.shadow' version '7.0.0'
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
 }
 
 group = 'net.frankheijden.serverutilsupdater'
 project.ext {
     dependencyDir = group + '.dependencies'
 }
-version = '3.0.2'
+version = '3.0.3'
 
 sourceCompatibility = targetCompatibility = JavaVersion.VERSION_1_8
 
 allprojects {
     ext {
-        serverutilsVersion = '3.3.0'
+        serverutilsVersion = '3.5.2'
     }
 }
 
